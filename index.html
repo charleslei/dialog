@@ -77,13 +77,11 @@
 
         <a href='javascript:;' id='clickme' style="display:block;white-space:nowrap;">click me!!!!!!!!!!!!!!!!!!!!!!!!!!!!</a>
     </div>
-	<div class="back"></div>
-	<div class="front"></div>
     <script type="text/javascript" src="./jquery-1.5.2.min.js"></script>
     <script type="text/javascript" src="./dialog.js"></script>
     <script type="text/javascript">
 	$(function(){
-            var dl = new Dialog();
+            var dl = new Dialog('<div style="width:500px;height:300px;background-color:#FFF"></div>');
             dl.show();
 	});
     </script>
