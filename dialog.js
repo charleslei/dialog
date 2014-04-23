@@ -84,6 +84,9 @@
     },
 
     remove: function(){
+      var me = this;
+      me.dom.fntDOM.remove();
+      me.backDOM.remove();
 
     }
   };
