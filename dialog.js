@@ -1,10 +1,26 @@
 ﻿(function(win, doc){
   function dialog(html){
-    html = html || '';
-    if(!html){
+    var args = Array.apply(null,arguments); 
+    var $html;
+    if(args.length === 0) return;
+
+    var one = args[0];
+    if(one instanceof jQuery){
+      $html = one;
+    } else if(Object.prototype.toString.call(one) === '[object String]'){
+      $html = $(one);
+    }else{
       return;
     }
-    var $html = $(html);
+
+    var two = args[1];   
+    this.cfg = {
+      onShow: function(){}
+    }
+    if(two && Object.prototype.toString.call(two) === "[object Function]"){
+      $.extend(this.cfg, {onShow: two});
+    }
+
     if($html && $html.length > 0){
       this._init($html);
     }
@@ -73,6 +89,7 @@
 
     show: function(){
       var me = this, dom = me.dom;
+      me.cfg.onShow();
       dom.fntDOM.show();
       dom.backDOM.show();
     },
