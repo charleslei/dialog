@@ -161,8 +161,8 @@ $(function(){
       });
 
       me.dom.fntDOM.bind('resize.dialog', function(e){
-        me.resized = true;
-        me._resize();
+        //me.resized = true;
+        //me._resize();
         e.preventDefault();
       });
 
