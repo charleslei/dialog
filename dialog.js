@@ -87,12 +87,7 @@
 
 })(jQuery,this);
 
-
-
-
-
 if(typeof QNR=="undefined"){ var QNR={}; }
-
 $(function(){
   function dialog(html){
     var args = Array.apply(null,arguments), me = this;
@@ -124,6 +119,7 @@ $(function(){
   var dl = {
     _init: function($html){
       var me = this;
+      me.resized = false;
       me.doc = $(document);
       me.win = $(window);
       me.body = $('body');
@@ -159,19 +155,20 @@ $(function(){
     _initEvent: function(){
       var me = this, br = $.browser;;
       me.win.bind('resize.dialog', function(e){
+        me.resized = true;
         me._resize();
         e.preventDefault();
       });
 
       me.dom.fntDOM.bind('resize.dialog', function(e){
+        me.resized = true;
         me._resize();
         e.preventDefault();
-
-      })
-
+      });
 
       if(br.msie && br.version === '6.0'){
         me.win.scroll(function(e){
+          me.resized = true;
           me._resize();
           e.preventDefault();
         })
@@ -200,11 +197,13 @@ $(function(){
         backDom.css({'height':dh + 'px','width':dw + 'px'});
         fntDom.css({'left': leftP + scrollLeft +'px', 'top': topP + scrollTop +'px'});
       }
+      me.resized = false;
     },
 
     show: function(){
       var me = this, dom = me.dom;
       me.cfg.onShow();
+      me.resized && me._resize();
       dom.fntDOM.show();
       dom.backDOM.show();
     },
@@ -224,7 +223,5 @@ $(function(){
   };
 
   dialog.prototype = dl;
-
   QNR.Dialog = dialog;
-
 });
