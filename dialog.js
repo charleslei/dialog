@@ -1,5 +1,4 @@
 ﻿(function($,window,undefined){
-
   var elems = $([]),
   jq_resize = $.resize = $.extend( $.resize, {} ),
   timeout_id,
@@ -12,16 +11,11 @@
   jq_resize[ str_throttle ] = true;
 
   $.event.special[ str_resize ] = {
-
     setup: function() {
       if ( !jq_resize[ str_throttle ] && this[ str_setTimeout ] ) { return false; }
-
       var elem = $(this);
-
       elems = elems.add( elem );
-
       $.data( this, str_data, { w: elem.width(), h: elem.height() } );
-
       if ( elems.length === 1 ) {
         loopy();
       }
@@ -29,13 +23,9 @@
 
     teardown: function() {
       if ( !jq_resize[ str_throttle ] && this[ str_setTimeout ] ) { return false; }
-
       var elem = $(this);
-
       elems = elems.not( elem );
-
       elem.removeData( str_data );
-
       if ( !elems.length ) {
         clearTimeout( timeout_id );
       }
@@ -43,14 +33,9 @@
 
     add: function( handleObj ) {
       if ( !jq_resize[ str_throttle ] && this[ str_setTimeout ] ) { return false; }
-
       var old_handler;
-
-
       function new_handler( e, w, h ) {
-        var elem = $(this),
-            data = $.data( this, str_data );
-
+        var elem = $(this), data = $.data( this, str_data );
         data.w = w !== undefined ? w : elem.width();
         data.h = h !== undefined ? h : elem.height();
 
@@ -65,7 +50,6 @@
         handleObj.handler = new_handler;
       }
     }
-
   };
 
   function loopy() {
@@ -76,15 +60,11 @@
         if ( width !== data.w || height !== data.h ) {
           elem.trigger( str_resize, [ data.w = width, data.h = height ] );
         }
-
       });
 
       loopy();
-
     }, jq_resize[ str_delay ] );
-
   };
-
 })(jQuery,this);
 
 if(typeof QNR=="undefined"){ var QNR={}; }
