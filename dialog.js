@@ -1,4 +1,5 @@
-﻿$(function(){
+﻿if(typeof QNR=="undefined"){ var QNR={}; }
+$(function(){
   function dialog(html){
     var args = Array.apply(null,arguments), me = this;
     var $html;
@@ -124,6 +125,6 @@
 
   dialog.prototype = dl;
 
-  window.Dialog = dialog;
+  QNR.Dialog = dialog;
 
 });
