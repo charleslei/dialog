@@ -38,11 +38,11 @@
       var me = this;
       me.dom = {};
       var backDom = $("<div></div>");
-      backDom.attr('style', 'width:100%;height:100%;left: 0;top: 0;opacity:0.5;position:fixed;background-color:#000;filter:alpha(opacity=50);');
+      backDom.attr('style', 'width:100%;height:100%;left: 0;top: 0;opacity:0.5;position:fixed;background-color:#000;filter:alpha(opacity=50);z-index:6666');
       this.dom.backDOM = backDom;
 
       var fntDom = $("<div></div>");
-      fntDom.attr('style', 'display:none;width:auto;height:auto;background-color:#FFF;position:fixed;');
+      fntDom.attr('style', 'display:none;width:auto;height:auto;background-color:#FFF;position:fixed;z-index:6667');
       this.dom.fntDOM = fntDom;
       fntDom.append(con);
       $('body').append(backDom).append(fntDom);
