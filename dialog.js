@@ -1,6 +1,6 @@
 ﻿(function(win, doc){
   function dialog(html){
-    var args = Array.apply(null,arguments); 
+    var args = Array.apply(null,arguments);
     var $html;
     if(args.length === 0) return;
 
@@ -13,7 +13,7 @@
       return;
     }
 
-    var two = args[1];   
+    var two = args[1];
     this.cfg = {
       onShow: function(){}
     }
@@ -53,37 +53,48 @@
     _drawIE6: function(){
       var me = this, br = $.browser;
       if(br.msie && br.version === '6.0'){
-        //TODO:100% or ?
         me.dom.backDOM.css({'position':'absolute'});
+        me.dom.fntDOM.css({'position':'absolute'});
+        me._resize();
       }
     },
     _initEvent: function(){
-      var me = this;
+      var me = this, br = $.browser;;
       $(win).bind('resize.dialog', function(e){
         me._resize();
         e.preventDefault();
       });
+
+
+      if(br.msie && br.version === '6.0'){
+        $(window).scroll(function(e){
+          me._resize();
+          e.preventDefault();
+        })
+      }
     },
 
     _resize: function(){
       var me = this;
-      var fntDom = me.dom.fntDOM, br = $.browser;
+      var fntDom = me.dom.fntDOM, backDom = me.dom.backDOM, br = $.browser;
+      var ww = $(win).width();
+      var wh = $(win).height();
+
+      var pw = fntDom.width();
+      var ph = fntDom.height();
+
+      var leftP = (ww - pw) / 2;
+      var topP = (wh - ph) / 2;
       if(!(br.msie && br.version === '6.0')){
-        var ww = $(win).width();
-        var wh = $(win).height();
-
-        var pw = fntDom.width();
-        var ph = fntDom.height();
-
-        var leftP = (ww - pw) / 2;
-        var topP = (wh - ph) / 2;
         fntDom.css({'left':leftP+'px', 'top':topP+'px'});
       }else{
-        var dh = $(doc).height();
-        var dw = $(doc).width();
-        //TODO:width=100% or ?
-        me.dom.backDOM.css({'height':dh+'px','width':dw+'px'});
-        //TODO: front;
+        var dh = $(document.body).outerHeight(true);
+        var dw = $(document.body).outerWidth(true);//浏览器时下窗口文档body的总宽度 包括border padding margin不包括滚动条；
+
+        var scrollLeft = $(document).scrollLeft();
+        var scrollTop = $(document).scrollTop();
+        backDom.css({'height':dh + 'px','width':dw + 'px'});
+        fntDom.css({'left': leftP + scrollLeft +'px', 'top': topP + scrollTop +'px'});
       }
     },
 
