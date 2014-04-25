@@ -77,13 +77,19 @@
 
         <a href='javascript:;' id='clickme' style="display:block;white-space:nowrap;">click me!!!!!!!!!!!!!!!!!!!!!!!!!!!!</a>
     </div>
+    <div id='dia' style="width:500px;background-color:#FFF;word-wrap: break-word;">this is a test <a id='clickme1' href='javascript:;'>clickme</a></div>
     <script type="text/javascript" src="./jquery-1.5.2.min.js"></script>
     <script type="text/javascript" src="./dialog.js"></script>
     <script type="text/javascript">
 	$(function(){
-            var dl = new QNR.Dialog('<div style="width:500px;height:300px;background-color:#FFF"></div>');
+            var dl = new QNR.Dialog($('#dia'));
             dl.show();
 	});
+        $('#clickme1').click(function(e){
+            var me  = $(this);
+            me.parent().append('==========================================');
+            e.preventDefault();
+        })
     </script>
 </body>
 </html>
