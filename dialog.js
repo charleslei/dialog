@@ -112,7 +112,7 @@ $(function(){
       var me = this;
       me.dom = {};
       var backDom = $("<div></div>");
-      backDom.attr('style', 'width:100%;height:100%;left: 0;top: 0;opacity:0.5;position:fixed;background-color:#000;_filter:alpha(opacity=50);z-index:6666');
+      backDom.attr('style', 'width:100%;height:100%;left: 0;top: 0;opacity:0.5;position:fixed;background-color:#000;filter:alpha(opacity=50)\9;z-index:6666');
       me.dom.backDOM = backDom;
 
       var fntDom = $("<div></div>");
